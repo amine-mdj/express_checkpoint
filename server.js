@@ -7,6 +7,15 @@ const expressLayouts = require('express-ejs-layouts')
 const app = express()
 const port = 5000
 
+app.use(function (req, res, next) {
+    var date = new Date();
+    if(date.getDay > 0 && date.getDay < 6 && date.getHours() > 9 && date.getHours < 17){
+        next();
+    }else{
+        res.render('offlinepage');
+    }
+});
+
 // Static Files
 app.use(express.static('public'))
 // Example for other folders - not required
